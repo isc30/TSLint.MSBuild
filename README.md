@@ -102,6 +102,11 @@ Note that to use special characters (such as `*` wildcards) in `TSLintExclude` y
             <td><em><code>(blank)</code></em></td>
         </tr>
         <tr>
+            <th><code>TSLintTimeout</code></th>
+            <td>Maximum time to run the task, in case TSLint hangs or takes too long.</td>
+            <td><code>10000000</code></td>
+        </tr>
+        <tr>
             <th><code>TSLintTypeCheck</code></th>
             <td>Whether to enable the type checker (requires <code>TSLintProject</code> be set).</td>
             <td><code>false</code></td>
