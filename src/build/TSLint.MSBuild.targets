@@ -62,7 +62,7 @@
       <Output TaskParameter="ExitCode" PropertyName="TSLintErrorCode" />
     </Exec>
 
-    <!-- Return an error if linter returned exitcode -1 and we should break on errors -->
-    <Error Condition="'$(TSLintErrorCode)' == '-1' and '$(TSLintBreakBuildOnError)' == 'true'" />
+    <!-- Return an error if TSLint returned an exit code and we should break on errors -->
+    <Error Condition="'$(TSLintErrorCode)' != '0' and '$(TSLintBreakBuildOnError)' == 'true'" />
   </Target>
 </Project>
