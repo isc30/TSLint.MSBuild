@@ -87,6 +87,11 @@ Note that to use special characters (such as `*` wildcards) in `TSLintExclude` y
             <td><code>(blank)</code></td>
         </tr>
         <tr>
+            <th><code>TSLintFileListDisabled</code></th>
+            <td>Whether to disable passing TypeScript file list on the command line. If true, it is expected that the files to lint are specified in the <code>TSLintProject</code> file.</td>
+            <td><code>false</code></td>
+        </tr>
+        <tr>
             <th><code>TSLintNodeExe</code></th>
             <td>Path to a Node executable to execute the runner script.</td>
             <td>The <code>tools\node-7.3.0.exe</code> in the package.</td>
@@ -116,10 +121,6 @@ Note that to use special characters (such as `*` wildcards) in `TSLintExclude` y
             <td>Glob filter for the version of TSLint to use <em>(ignored if <code>TSLintConfig</code> is provided)</em>.</td>
             <td><code>*.*.*</code></td>
         </tr>
-        <tr>
-            <th><code>TSLintFileListDisabled</code></th>
-            <td>Whether to disable passing TypeScript file list on the command line. If true, it is expected that the files to lint are specified in the <code>TSLintProject</code> file.</td>
-            <td><code>false</code></td>
     </tbody>
 </table>
 
@@ -172,6 +173,7 @@ MSBuild escapes `*` and other special characters using `%` and their hexadecimal
 Run the following commands to initialize your environment:
 
 ```shell
+npm install -g gulp
 npm install
 ```
 
@@ -182,38 +184,5 @@ Run `gulp` to build.
 
 The version number is stored both in `package.json` and `TSLint.MSBuild.nuspec`.
 Make sure to update it in both places.
-
-### 0.X to 1.X
-
-0.X versions ran JavaScript logic to search for TSLint, run it, and wrap the output.
-This was slow (running two nested Node processes, with intermediary file names in text).
-
-1.X versions now are completely in a single MSBuild file.
-This is better for performance but has two downsides:
-* It no longer searches for the "highest" available TSLint version in the packages directory; instead, the first found in a file search is used.
-* The `TSLintErrorSeverity` flag is no longer supported (until TSLint adds support for error levels).
-
-Furthermore, `1.0.0` removed the TSLint NuGet package dependency.
-You'll need to install it separately.
-
-#### Why?
-
-The original structure of TSLint.MSBuild requires multiple layers of processes calling each other, which can wreak havoc in complex managed build systems.
-Then, in order:
-
-1. MSBuild determined build settings and passed them to the JavaScript code
-2. JavaScript code determined the TSLint location and re-formulated any arguments
-3. JavaScript code ran TSLint via a spawned process, captured its output, and re-logged it
-4. MSBuild captured the (re-logged TSLint) JavaScript output and logged it 
-
-1.X unified all the logic into MSBuild, which resulted in significant performance gains, code simplification, and runtime stability. 
-Now, in order:
-
-1. MSBuild determines build settings and TSLint location
-2. MSBuild runs TSLint using the packaged Node executable
-
-### 0.3.X to 0.4.X
-
-Versions 0.3.X and below manually call TSLint on individual folders, whereas 0.4.X defers to the TSLint CLI.
 
 File a [bug report](https://github.com/JoshuaKGoldberg/TSLint.MSBuild/issues) if upgrading causes any issues.
