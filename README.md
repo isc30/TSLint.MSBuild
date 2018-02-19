@@ -4,7 +4,7 @@ Old version seems unmaintained, that's why I forked it.
 
 [![NuGet Version and Downloads count](https://buildstats.info/nuget/Updated.TSLint.MSBuild)](https://www.nuget.org/packages/Updated.TSLint.MSBuild) 
 
-An MSBuild target for linting TypeScript code using [TSLint](https://github.com/palantir/tslint). Get it at [nuget.org](https://www.nuget.org/packages/TSLint.MSBuild/).
+An MSBuild target for linting TypeScript code using [TSLint](https://github.com/palantir/tslint). Get it at [nuget.org](https://www.nuget.org/packages/Updated.TSLint.MSBuild).
 
 ## Usage
 
@@ -199,4 +199,4 @@ Run `gulp` to build.
 The version number is stored both in `package.json` and `TSLint.MSBuild.nuspec`.
 Make sure to update it in both places.
 
-File a [bug report](https://github.com/JoshuaKGoldberg/TSLint.MSBuild/issues) if upgrading causes any issues.
+File a [bug report](https://github.com/isc30/TSLint.MSBuild/issues) if upgrading causes any issues.
