@@ -54,8 +54,7 @@ Note that to use special characters (such as `*` wildcards) in `TSLintExclude` y
 
 ```xml
 <ItemGroup>
-    <!-- Equivalent to "typings/**/*.d.ts" -->
-    <TSLintExclude Include="typings/%2A%2A/%2A.d.ts"><Visible>False</Visible></TSLintExclude>
+    <TSLintExclude Include="typings/**/*.d.ts"><Visible>False</Visible></TSLintExclude>
 </ItemGroup>
 ```
 
@@ -175,12 +174,6 @@ Note that to use special characters (such as `*` wildcards) in `TSLintExclude` y
 ### TSLint version
 
 The *first* available TSLint version in your NuGet packages directory will be used. 
-
-### Errata
-
-You can exclude `.d.ts` files using `<TSLintExclude Include="%2A%2A/%2A.d.ts" />`.
-MSBuild escapes `*` and other special characters using `%` and their hexadecimal value.
-
 
 ## Development
 
