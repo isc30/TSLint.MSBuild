@@ -8,7 +8,7 @@
     Name="TSLint"
     Outputs="$([System.DateTime]::UtcNow.Ticks)">
 
-	<Message Text="Checking TSLint..." Importance="high" />
+	<Message Text="Running TSLint..." Importance="high" />
 	
     <ItemGroup Condition="'$(TSLintExcludeTypeScriptCompile)' != 'true'">
       <TSLintInclude Include="@(TypeScriptCompile)" />
