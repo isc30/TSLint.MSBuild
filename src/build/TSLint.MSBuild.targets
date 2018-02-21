@@ -42,6 +42,7 @@
     <PropertyGroup>
       <TSLintExclude Condition="'@(TSLintExclude)' != ''">@(TSLintExclude.Replace("*", "%2A"))</TSLintExclude>
       <TSLintExclude Condition="'@(TSLintExclude)' != ''">@(TSLintExclude.Replace(".", "%2E"))</TSLintExclude>
+      
       <TSLintExcludeJoined Condition="'@(TSLintExclude)' != ''">@(TSLintExclude, ' --exclude ')</TSLintExcludeJoined>
     </PropertyGroup>
 
