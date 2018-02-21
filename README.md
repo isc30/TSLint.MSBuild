@@ -76,6 +76,11 @@ Read the [TSLint documentation](https://github.com/palantir/tslint) for TSLint-s
             <td><em><code>(blank)</code></em></td>
         </tr>
         <tr>
+            <th><code>TSLintForceBuild</code></th>
+            <td>Force TSLint to run after the build, even if there are no file changes. Not compatible with <code>TSLintTimestampFile</code>, this is the recommended option when using <code>TSLintBreakBuildOnError</code></td>
+            <td><code>false</code></td>
+        </tr>
+        <tr>
             <th><code>TSLintCli</code></th>
             <td>Path to a TSLint CLI to run with.</td>
             <td>The first TSLint version in the solution's <code>packages</code> directory, or the Project Dir's node_modules/tslint/bin/tslint directory.</td>
