@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <!-- Ensures that if this file changes it forces a TypeScript rebuild -->
   <PropertyGroup>
     <TypeScriptAllProjects>$(TypeScriptAllProjects);$(MSBuildThisFileFullPath)</TypeScriptAllProjects>
     <TSLintTimestampFile Condition="'$(TSLintTimestampFile)' == ''">$(OutputPath)\$(MSBuildProjectName).TSLint.timestamp.txt</TSLintTimestampFile>
+    <TSLintTimestampFile Condition="'$(TSLintForceBuild)' == 'true'">$([System.DateTime]::UtcNow.Ticks)</TSLintTimestampFile>
   </PropertyGroup>
 
   <Target
@@ -12,6 +14,8 @@
     Inputs="@(TSLintInclude);@(TypeScriptCompile)"
     Name="TSLint"
     Outputs="$(TSLintTimestampFile)">
+
+    <Message Text="Running TSLint..." Importance="high" />
 
     <ItemGroup Condition="'$(TSLintExcludeTypeScriptCompile)' != 'true'">
       <TSLintInclude Include="@(TypeScriptCompile)" />
@@ -79,6 +83,6 @@
     </Exec>
 
     <!-- Return an error if TSLint returned an exit code and we should break on errors -->
-    <Error Condition="'$(TSLintErrorCode)' != '0' and '$(TSLintBreakBuildOnError)' == 'true'" />
+    <Error Condition="'$(TSLintErrorCode)' != '0' and '$(TSLintBreakBuildOnError)' == 'true'" Text="TSLint checks failed" />
   </Target>
 </Project>
