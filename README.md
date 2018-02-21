@@ -48,11 +48,10 @@ Read the [TSLint documentation](https://github.com/palantir/tslint) for TSLint-s
     </tbody>
 </table>
 
-Note that to use special characters (such as `*` wildcards) in `TSLintExclude` you must escape the special characters.
-
 ```xml
-<!-- Equivalent to "typings/**/*.d.ts" -->
-<TSLintExclude Include="typings/%2A%2A/%2A.d.ts" />
+<ItemGroup>
+    <TSLintExclude Include="typings/**/*.d.ts"><Visible>False</Visible></TSLintExclude>
+</ItemGroup>
 ```
 
 #### Overrideable Properties
