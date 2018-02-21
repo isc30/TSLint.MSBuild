@@ -13,6 +13,8 @@
     Name="TSLint"
     Outputs="$(TSLintTimestampFile)">
 
+    <Message Text="Running TSLint..." Importance="high" />
+
     <ItemGroup Condition="'$(TSLintExcludeTypeScriptCompile)' != 'true'">
       <TSLintInclude Include="@(TypeScriptCompile)" />
     </ItemGroup>
@@ -78,6 +80,6 @@
     </Exec>
 
     <!-- Return an error if TSLint returned an exit code and we should break on errors -->
-    <Error Condition="'$(TSLintErrorCode)' != '0' and '$(TSLintBreakBuildOnError)' == 'true'" />
+    <Error Condition="'$(TSLintErrorCode)' != '0' and '$(TSLintBreakBuildOnError)' == 'true'" Text="TSLint checks failed" />
   </Target>
 </Project>
