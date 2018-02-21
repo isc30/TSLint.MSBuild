@@ -40,21 +40,22 @@
     <PropertyGroup>
       <TSLintExclude Condition="'@(TSLintExclude)' != ''">@(TSLintExclude.Replace("*", "%2A"))</TSLintExclude>
       <TSLintExclude Condition="'@(TSLintExclude)' != ''">@(TSLintExclude.Replace(".", "%2E"))</TSLintExclude>
+      <TSLintExclude Condition="'@(TSLintExclude)' != ''">@(TSLintExclude.Replace('"', "%22"))</TSLintExclude>
       
-      <TSLintExcludeJoined Condition="'@(TSLintExclude)' != ''">@(TSLintExclude, ' --exclude ')</TSLintExcludeJoined>
+      <TSLintExcludeJoined Condition="'@(TSLintExclude)' != ''">@(TSLintExclude, '" --exclude "')</TSLintExcludeJoined>
     </PropertyGroup>
 
     <!-- Build the TSLint arguments -->
     <PropertyGroup>
       <TSLintArgs></TSLintArgs>
-      <TSLintArgs Condition="'$(TSLintConfig)' != ''">$(TSLintArgs) --config $(TSLintConfig)</TSLintArgs>
-      <TSLintArgs Condition="'@(TSLintExclude)' != ''">$(TSLintArgs) --exclude $(TSLintExcludeJoined)</TSLintArgs>
-      <TSLintArgs>$(TSLintArgs) --format $(TSLintFormat)</TSLintArgs>
-      <TSLintArgs Condition="'$(TSLintProject)' != ''">$(TSLintArgs) --project $(TSLintProject)</TSLintArgs>
-      <TSLintArgs Condition="'$(TSLintTypeCheck)' != ''">$(TSLintArgs) --type-check $(TSLintTypeCheck)</TSLintArgs>
-      <TSLintArgs Condition="'@(TSLintRulesDirectory)' != ''">$(TSLintArgs) --rules-dir @(TSLintRulesDirectory, ' --rules-dir ')</TSLintArgs>
+      <TSLintArgs Condition="'$(TSLintConfig)' != ''">$(TSLintArgs) --config "$(TSLintConfig)"</TSLintArgs>
+      <TSLintArgs Condition="'@(TSLintExclude)' != ''">$(TSLintArgs) --exclude "$(TSLintExcludeJoined)"</TSLintArgs>
+      <TSLintArgs>$(TSLintArgs) --format "$(TSLintFormat)"</TSLintArgs>
+      <TSLintArgs Condition="'$(TSLintProject)' != ''">$(TSLintArgs) --project "$(TSLintProject)"</TSLintArgs>
+      <TSLintArgs Condition="'$(TSLintTypeCheck)' != ''">$(TSLintArgs) --type-check "$(TSLintTypeCheck)"</TSLintArgs>
+      <TSLintArgs Condition="'@(TSLintRulesDirectory)' != ''">$(TSLintArgs) --rules-dir "@(TSLintRulesDirectory, '" --rules-dir "')"</TSLintArgs>
       <TSLintArgs Condition="'$(TSLintExtraArgs)' != ''">$(TSLintArgs) $(TSLintExtraArgs)</TSLintArgs>
-      <TSLintArgs Condition="'$(TSLintFileListDisabled)' != 'true' And '@(TSLintInclude)' != ''">$(TSLintArgs) @(TSLintInclude, ' ')</TSLintArgs>
+      <TSLintArgs Condition="'$(TSLintFileListDisabled)' != 'true' And '@(TSLintInclude)' != ''">$(TSLintArgs) "@(TSLintInclude, '" "')"</TSLintArgs>
     </PropertyGroup>
 
     <Error Condition="'$(TSLintFileListDisabled)' == 'true' And '$(TSLintProject)' == ''" Text="You disabled file listing on the command line using TSLintFileDisabled, but did not specify a project file with TSLintProject." />
