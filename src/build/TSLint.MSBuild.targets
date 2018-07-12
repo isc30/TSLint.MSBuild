@@ -21,8 +21,11 @@
         process.Start();
         process.WaitForExit();
         ExitCode = process.ExitCode;
-        ConsoleOutput = process.StandardOutput.ReadToEnd();
-        Log.LogError(ConsoleOutput);
+        ConsoleOutput = process.StandardOutput.ReadToEnd().Trim('\r', '\n');
+        if (!string.IsNullOrWhiteSpace(ConsoleOutput))
+        {
+          Log.LogError(ConsoleOutput);
+        }
       </Code>
     </Task>
   </UsingTask>
