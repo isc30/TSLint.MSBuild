@@ -19,12 +19,21 @@
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
         process.Start();
+	     
+		// Synchronously read the standard output of the spawned process.
+		// Read must be done before waiting for exit code to avoid deadlocks
+		ConsoleOutput = process.StandardOutput.ReadToEnd().Trim('\r', '\n');
+		
         process.WaitForExit();
-        ExitCode = process.ExitCode;
-        ConsoleOutput = process.StandardOutput.ReadToEnd().Trim('\r', '\n');
+		ExitCode = process.ExitCode;
+		process.Close();
+		
         if (!string.IsNullOrWhiteSpace(ConsoleOutput))
         {
-          Log.LogError(ConsoleOutput);
+		  foreach (var outputLine in ConsoleOutput.Split('\n'))
+          {
+		    Log.LogError(outputLine);
+		  }
         }
       </Code>
     </Task>
