@@ -1,6 +1,6 @@
 {
   "name": "new-tslint-msbuild",
-  "version": "2.1",
+  "version": "2.4",
   "description": "Updated MSBuild target for linting TypeScript code using TSLint.",
   "author": "Ivan Sanz-Carasa",
   "license": "MIT",

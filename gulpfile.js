@@ -34,12 +34,12 @@ gulp.task("nuget-download", callback => {
         return;
     }
 
-    request.get("http://nuget.org/nuget.exe")
+    request.get("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe")
         .pipe(fs.createWriteStream("nuget.exe"))
         .on("close", () => {
             if (fs.statSync("nuget.exe").size <= 0) {
                 throw new Error([
-                    "Could not download nuget.exe from http://nuget.org/nuget.exe.",
+                    "Could not download nuget.exe from http://nuget.org/downloads",
                     "Try downloading it to " + __dirname + " manually."
                 ].join(" "));
             }
