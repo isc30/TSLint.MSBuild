@@ -20,20 +20,20 @@
         process.StartInfo.RedirectStandardOutput = true;
         process.Start();
 	     
-		// Synchronously read the standard output of the spawned process.
-		// Read must be done before waiting for exit code to avoid deadlocks
-		ConsoleOutput = process.StandardOutput.ReadToEnd().Trim('\r', '\n');
+        // Synchronously read the standard output of the spawned process.
+        // Read must be done before waiting for exit code to avoid deadlocks
+        ConsoleOutput = process.StandardOutput.ReadToEnd().Trim('\r', '\n');
 		
         process.WaitForExit();
-		ExitCode = process.ExitCode;
-		process.Close();
+        ExitCode = process.ExitCode;
+        process.Close();
 		
         if (!string.IsNullOrWhiteSpace(ConsoleOutput))
         {
-		  foreach (var outputLine in ConsoleOutput.Split('\n'))
+          foreach (var outputLine in ConsoleOutput.Split('\n'))
           {
-		    Log.LogError(outputLine);
-		  }
+            Log.LogError(outputLine);
+          }
         }
       </Code>
     </Task>
